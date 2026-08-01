@@ -57,3 +57,34 @@
 #include <iostream>
 using namespace std;
 
+void multiplicationTbl(int N)
+{
+  cout << "Multiplication Table for " << N << ": " << endl;
+
+  for (int i = 1; i < 13; i++ ){
+    int result = N * i;
+    cout << N << " x " << i << " = " << result << endl;
+  }
+}
+
+void multiplication_Tbl_1_to_N(int N){
+  for (int i = 1; i <= N; i++){
+    multiplicationTbl(i);
+    cout << "---------------------------" << endl;
+  }
+}
+
+int main()
+{
+  cout << "PART A: Single Table" << endl;
+  int N;
+  cout << "Enter a number(N): ";
+  cin >> N;
+  multiplicationTbl(N);
+
+  cout << "PART B - Bonus: Tables from 1 to N" << endl;
+  cout << "Enter a number(N): ";
+  cin >> N;
+  multiplication_Tbl_1_to_N(N);
+  return 0;
+}
