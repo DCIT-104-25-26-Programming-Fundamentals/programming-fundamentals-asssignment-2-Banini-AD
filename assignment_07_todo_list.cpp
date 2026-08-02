@@ -80,3 +80,115 @@
 #include <string>
 using namespace std;
 
+struct Tasks
+{
+  int number;
+  string task;
+};
+
+void addTask(vector<Tasks> &tasks)
+{
+
+  Tasks newTask;
+
+  cout << "Enter task: ";
+  cin >> ws;
+  getline(cin, newTask.task);
+
+  newTask.number = tasks.size() + 1;
+
+
+  tasks.push_back(newTask);
+  cout << "Task added: \"" << newTask.task << "\"" << endl;
+}
+
+void displayTasks(const vector<Tasks> &tasks)
+{
+  if (tasks.empty())
+  {
+    cout << "NO tasks found." << endl;
+  }
+
+  for (const Tasks &t : tasks)
+  {
+    cout << t.number << ". " << t.task << endl;
+  }
+}
+
+void deleteTask(vector<Tasks> &tasks)
+{
+  if (tasks.empty())
+  {
+    cout << "NO tasks found." << endl;
+    return;
+  }
+
+  displayTasks(tasks);
+
+  int taskNumber;
+  cout << "Enter task number to delete: ";
+  cin >> taskNumber;
+
+  if (taskNumber < 1 || taskNumber > tasks.size())
+  {
+    cout << "Error: Invalid task number." << endl;
+    return;
+  }
+
+  string removedTask = tasks[taskNumber - 1].task;
+  tasks.erase(tasks.begin() + taskNumber - 1);
+  cout << "Task \"" << removedTask << "\" has been removed." << endl;
+
+  for (int i = 0; i < tasks.size(); i++)
+  {
+    tasks[i].number = i + 1;
+  }
+}
+
+void quitProgram()
+{
+  cout << "Goodbye!" << endl;
+}
+
+int main()
+{
+  vector<Tasks> tasks;
+  int selectedNumber;
+  bool running = true;
+
+  cout << "================================" << endl;
+  cout << "         TO-DO LIST MENU        " << endl;
+  cout << "================================" << endl;
+  while (running)
+  {
+    cout << "1. Add task" << endl;
+    cout << "2. View tasks" << endl;
+    cout << "3. Delete task" << endl;
+    cout << "4. Quit" << endl;
+    cout << "Enter your choice (1-4): ";
+    cin >> selectedNumber;
+
+    if (selectedNumber < 1 || selectedNumber > 4)
+    {
+      cout << "Error: Please enter a valid choice (1-4)." << endl;
+    }
+    else if (selectedNumber == 1)
+    {
+      addTask(tasks);
+    }
+    else if (selectedNumber == 2)
+    {
+      displayTasks(tasks);
+    }
+    else if (selectedNumber == 3)
+    {
+      deleteTask(tasks);
+    }
+    else if (selectedNumber == 4)
+    {
+      quitProgram();
+      running = false;
+    }
+  }
+  return 0;
+}
