@@ -73,3 +73,148 @@
 #include <cmath>
 using namespace std;
 
+void add()
+{
+  int a;
+  int b;
+  cout << "Enter first number: ";
+  cin >> a;
+  cout << "Enter second number: ";
+  cin >> b;
+  double result = a + b;
+  cout << "Result: " << result << endl;
+}
+
+void subtract()
+{
+  int a;
+  int b;
+  cout << "Enter first number: ";
+  cin >> a;
+  cout << "Enter second number: ";
+  cin >> b;
+
+  double result = a - b;
+  cout << "Result: " << result << endl;
+}
+
+void multiply()
+{
+  int a;
+  int b;
+  cout << "Enter first number: ";
+  cin >> a;
+  cout << "Enter second number: ";
+  cin >> b;
+
+  double result = a * b;
+  cout << "Result: " << result << endl;
+}
+
+void divide()
+{
+  int a;
+  int b;
+  cout << "Enter first number: ";
+  cin >> a;
+  cout << "Enter second number: ";
+  cin >> b;
+  if (b == 0)
+  {
+    cout << "Error: Cannot divide by zero." << endl;
+  }
+
+  double result = a / (double)b;
+  cout << "Result: " << fixed << setprecision(2) << result << endl;
+}
+
+void calculateModulus()
+{
+  int a;
+  int b;
+  cout << "Enter first number: ";
+  cin >> a;
+  cout << "Enter second number: ";
+  cin >> b;
+  if (b == 0)
+  {
+    cout << "Error: Cannot calculate modulus with zero." << endl;
+  }
+
+  double result = fmod(a, b);
+  cout << "Result: " << result << endl;
+}
+
+void exponentiate()
+{
+  int a;
+  int b;
+  cout << "Enter base: ";
+  cin >> a;
+  cout << "Enter exponent: ";
+  cin >> b;
+  double result = pow(a, b);
+  cout << "Result: " << fixed << setprecision(2) << result << endl;
+}
+
+void quitProgram()
+{
+  cout << "Goodbye!" << endl;
+}
+
+int main()
+{
+  int selectedNumber;
+  bool running = true;
+
+  cout << "================================" << endl;
+  cout << "       SIMPLE CALCULATOR        " << endl;
+  cout << "================================" << endl;
+  while (running)
+  {
+    cout << "1. Addition" << endl;
+    cout << "2. Subtraction" << endl;
+    cout << "3. Multiplication" << endl;
+    cout << "4. Division" << endl;
+    cout << "5. Modulus" << endl;
+    cout << "6. Exponentiation" << endl;
+    cout << "7. Quit" << endl;
+    cout << "Enter your choice (1-7): ";
+    cin >> selectedNumber;
+
+    if (selectedNumber < 1 || selectedNumber > 7)
+    {
+      cout << "Error: Please enter a valid choice (1-7)." << endl;
+    }
+    else if (selectedNumber == 1)
+    {
+      add();
+    }
+    else if (selectedNumber == 2)
+    {
+      subtract();
+    }
+    else if (selectedNumber == 3)
+    {
+      multiply();
+    }
+    else if (selectedNumber == 4)
+    {
+      divide();
+    }
+    else if (selectedNumber == 5)
+    {
+      calculateModulus();
+    }
+    else if (selectedNumber == 6)
+    {
+      exponentiate();
+    }
+    else if (selectedNumber == 7)
+    {
+      quitProgram();
+      running = false;
+    }
+  }
+  return 0;
+}
