@@ -83,3 +83,139 @@
 #include <iomanip>
 using namespace std;
 
+struct Student
+{
+  string name;
+  string id;
+  vector<double> scores;
+};
+
+void avgScore(const vector<Student> &students){
+  if(students.empty()){
+    cout << "Database is empty." << endl;
+  }
+
+  string studentId;
+  cout << "Enter student ID: ";
+  cin >> studentId;
+
+  bool found = false;
+  for (const Student &s : students){
+    if(s.id == studentId){
+      found = true;
+      double sum = 0;
+      for(double score : s.scores){
+        sum += score;
+      }
+      double average = sum / s.scores.size();
+      cout << s.name << "'s average score: " <<  fixed << setprecision(2) << average << endl;
+    }
+
+    if(!found){
+      cout << "Error: Student ID not found." << endl;
+    }
+  }
+
+}
+
+void displayStudents(const vector<Student> &students)
+{
+  if (students.empty())
+  {
+    cout << "NO students records found." << endl;
+  }
+
+  for (const Student &s : students)
+  {
+    cout << s.name << "\t\t" << s.id << "\t";
+
+    for (double score : s.scores)
+    {
+      cout << score << " ";
+    }
+    cout << endl;
+  }
+}
+
+void addStudent(vector<Student> &students)
+{
+
+  Student newStudent;
+
+  cout << "Student name: ";
+  cin >> ws;
+  getline(cin, newStudent.name);
+
+  cout << "Student ID: ";
+  cin >> newStudent.id;
+
+  cout << "How many scores? ";
+  int numOfScores;
+  cin >> numOfScores;
+
+  if (numOfScores < 1)
+  {
+    cout << "Error: Number of scores must be greater than 0." << endl;
+  }
+  else
+  {
+    for (int i = 0; i < numOfScores; i++)
+    {
+      double score;
+      cout << "Enter score " << i + 1 << ": ";
+      cin >> score;
+      newStudent.scores.push_back(score);
+    }
+  }
+
+  students.push_back(newStudent);
+  cout << "Student \"" << newStudent.name << "\" added successfully." << endl;
+}
+
+void quitProgram()
+{
+  cout << "Goodbye!" << endl;
+}
+
+int main()
+{
+  vector<Student> students;
+  int selectedNumber;
+  bool running = true;
+
+  cout << "================================" << endl;
+  cout << "   STUDENT RECORD SYSTEM MENU   " << endl;
+  cout << "================================" << endl;
+  while (running)
+  {
+    cout << "1. Add student" << endl;
+    cout << "2. Display all students" << endl;
+    cout << "3. Calculate average score" << endl;
+    cout << "4. Quit" << endl;
+    cout << "Enter your choice (1-4): ";
+    cin >> selectedNumber;
+
+    if (selectedNumber < 1 || selectedNumber > 4)
+    {
+      cout << "Error: Please enter a valid choice (1-4)." << endl;
+    }
+    else if (selectedNumber == 1)
+    {
+      addStudent(students);
+    }
+    else if (selectedNumber == 2)
+    {
+      displayStudents(students);
+    }
+    else if (selectedNumber == 3)
+    {
+      avgScore(students);
+    }
+    else if (selectedNumber == 4)
+    {
+      quitProgram();
+      running = false;
+    }
+  }
+  return 0;
+}
